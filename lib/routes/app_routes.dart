@@ -1,17 +1,17 @@
 
 import 'package:flutter/material.dart';
-import 'package:space_x/features/onboarding/onboarding_screen.dart';
-
-import '../features/onboarding/splash_screen.dart';
+import 'package:space_x/features/onboarding/splash_screen.dart';
 
 class AppRouter {
 
-  static String get splash => "/splash_screen";
-  static String get onboarding => "/onboarding_screen";
+  Route? generateRoute(RouteSettings settings){
 
-  static Map<String, WidgetBuilder> routes = {
-    splash: (context) => const SplashScreen(),
-    onboarding: (context) => const OnboardingScreen(),
-  };
+    switch(settings.name){
+      case '/':
+        return MaterialPageRoute(builder: (_) => SplashScreen());
+    }
+    return null;
+
+  }
 
 }
