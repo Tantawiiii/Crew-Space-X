@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:space_x/core/utils/colors_code.dart';
 
@@ -48,7 +46,7 @@ class OnboardingScreen extends StatelessWidget {
                   color:  ColorsCode.whiteColor300.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                child: Row(),
+                child: const Row(),
               ),
             ],
           ),
