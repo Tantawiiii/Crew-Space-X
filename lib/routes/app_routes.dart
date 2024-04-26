@@ -6,9 +6,12 @@ class AppRouter {
 
   Route? generateRoute(RouteSettings settings){
 
-    switch(settings.name){
+    switch ( settings.name ) {
+
       case '/':
-        return MaterialPageRoute(builder: (_) => SplashScreen());
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
+
+
     }
     return null;
 
