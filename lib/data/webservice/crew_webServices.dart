@@ -20,7 +20,6 @@ class CrewWebServices {
   }
 
   Future <List <dynamic>> getAllCrews() async{
-
     try{
       Response response = await dio.get('/crew');
       if (kDebugMode) {
