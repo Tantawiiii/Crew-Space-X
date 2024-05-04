@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class ColorsCode {
 
-  static Color  blackColor = hexToColor('#00000000');
+  static Color  blackColor = hexToColor('#000000');
   static Color  blackColor100 = hexToColor('#1E1E1E');
   static Color  blackColor700 = hexToColor('#373737');
   static Color  whiteColor = hexToColor('#FFFFFF');
