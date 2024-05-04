@@ -19,7 +19,6 @@ class _CrewScreenState extends State<CrewScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     allCrews = BlocProvider.of<CrewSpaceXCubit>(context).getAllCrews();
   }
