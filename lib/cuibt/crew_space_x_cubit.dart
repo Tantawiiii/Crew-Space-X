@@ -9,7 +9,7 @@ part 'crew_space_x_state.dart';
 class CrewSpaceXCubit extends Cubit<CrewSpaceXState> {
 
   final CrewRepository crewRepository;
-  late  List <CrewModel> crews;
+    List <CrewModel> crews = [];
 
   CrewSpaceXCubit(this.crewRepository) : super(CrewSpaceXInitial());
 
