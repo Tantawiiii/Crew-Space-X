@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:space_x/core/utils/colors_code.dart';
 import 'package:space_x/data/models/CrewModel.dart';
 
