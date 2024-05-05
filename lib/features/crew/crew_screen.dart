@@ -16,11 +16,14 @@ class CrewScreen extends StatefulWidget {
 
 class _CrewScreenState extends State<CrewScreen> {
   late List<CrewModel> allCrews;
+  late List<CrewModel> searchedForCrew;
+  bool _isSearching = false;
+  final _searchTextController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    allCrews = BlocProvider.of<CrewSpaceXCubit>(context).getAllCrews();
+    BlocProvider.of<CrewSpaceXCubit>(context).getAllCrews();
   }
 
   @override
@@ -30,10 +33,12 @@ class _CrewScreenState extends State<CrewScreen> {
         backgroundColor: Colors.black,
         shadowColor: Colors.blueAccent,
         elevation: 3.0,
-        title: Text(
-          'SpaceX Cub',
-          style: TextStyle(color: ColorsCode.whiteColor200),
-        ),
+        title: _isSearching ? _buildSearchedTextField() : _buildAppBarTitle(),
+        actions: _buildAppBarActions(),
+        leading: _isSearching ?
+        const BackButton(
+          color: Colors.amber,
+        ) : Container(),
       ),
       body: Container(
         //width: double.infinity,
@@ -44,33 +49,7 @@ class _CrewScreenState extends State<CrewScreen> {
             fit: BoxFit.fitHeight,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: ListView(
-            children: [
-              Text(
-                "SpaceX Crew",
-                style: TextStyle(
-                  fontFamily: 'Bebas Neue',
-                  color: ColorsCode.whiteColor,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 38.0,
-                  shadows: const [
-                    Shadow(
-                      color: Colors.blue,
-                      blurRadius: 4.0,
-                      offset: Offset(5.0, 2.0),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              buildBlocWidget(),
-            ],
-          ),
-        ),
+        child: buildBlocWidget(),
       ),
     );
   }
@@ -82,13 +61,13 @@ class _CrewScreenState extends State<CrewScreen> {
           allCrews = (state).crews;
           return buildLoadedCrewsListWidget();
         } else {
-         return _buildLoadingIndicator();
+          return _buildLoadingIndicator();
         }
       },
     );
   }
 
-  Widget _buildLoadingIndicator(){
+  Widget _buildLoadingIndicator() {
     return Center(
       child: CircularProgressIndicator(
         color: ColorsCode.blue500,
@@ -100,6 +79,9 @@ class _CrewScreenState extends State<CrewScreen> {
     return SingleChildScrollView(
       child: Column(
         children: [
+          const SizedBox(
+            height: 24,
+          ),
           buildCrewList(),
         ],
       ),
@@ -116,10 +98,115 @@ class _CrewScreenState extends State<CrewScreen> {
       ),
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
-         itemCount: allCrews.length,
+      itemCount: _searchTextController.text.isEmpty ? allCrews.length : searchedForCrew.length,
       itemBuilder: (context, index) {
-        return CrewItem(crews: allCrews[index],);
+        return CrewItem(
+          crews: _searchTextController.text.isEmpty ? allCrews[index] : searchedForCrew[index],
+        );
       },
     );
   }
+
+  Widget _buildSearchedTextField() {
+    return TextField(
+      controller: _searchTextController,
+      cursorColor: ColorsCode.blackColor700,
+      decoration: InputDecoration(
+        hintText: "Find a Crew",
+        border: InputBorder.none,
+        hintStyle: TextStyle(
+          color: ColorsCode.whiteColor100,
+          fontSize: 16,
+        ),
+      ),
+      style: TextStyle(
+        color: ColorsCode.whiteColor100,
+        fontSize: 16,
+      ),
+      onChanged: (searchedCrew) {
+        addSearchedForItemToSearchedList(searchedCrew);
+      },
+    );
+  }
+
+  void addSearchedForItemToSearchedList(String searchedCrew) {
+    searchedForCrew = allCrews
+        .where((crew) => crew.name!.toLowerCase().startsWith(searchedCrew))
+        .toList();
+
+    setState(() {});
+  }
+
+
+  Widget _buildAppBarTitle(){
+    return     Text(
+      "SpaceX Crews",
+      style: TextStyle(
+        fontFamily: 'Bebas Neue',
+        color: ColorsCode.whiteColor,
+        fontWeight: FontWeight.normal,
+        fontSize: 38.0,
+        shadows: const [
+          Shadow(
+            color: Colors.blue,
+            blurRadius: 4.0,
+            offset: Offset(5.0, 2.0),
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> _buildAppBarActions() {
+    if (_isSearching) {
+      return [
+        IconButton(
+          onPressed: () {
+            _clearSearchHistory();
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.clear,
+            color: Colors.amber,
+          ),
+        ),
+      ];
+    } else {
+      return [
+        IconButton(
+          onPressed: _startSearching,
+          icon: const Icon(
+            Icons.search,
+            color: Colors.white,
+          ),
+        ),
+      ];
+    }
+  }
+
+  void _startSearching() {
+
+    ModalRoute.of(context)!.addLocalHistoryEntry(LocalHistoryEntry(
+      onRemove: _stopSearching,
+    ));
+
+    setState(() {
+      _isSearching = true;
+    });
+  }
+
+  void _stopSearching() {
+    _clearSearchHistory();
+    setState(() {
+    _isSearching = false;
+    });
+  }
+
+  void _clearSearchHistory() {
+    _searchTextController.clear();
+  }
+
+
+
 }
+

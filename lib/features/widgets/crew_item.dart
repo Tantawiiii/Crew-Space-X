@@ -20,21 +20,36 @@ class CrewItem extends StatelessWidget {
       child: GridTile(
         footer: Container(
           width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 15,
-          vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           color: ColorsCode.blackColor100,
           alignment: Alignment.bottomCenter,
-          child: Text(
-            crews.name ?? "" ,
-            style: TextStyle(
-              height: 1.3,
-              fontSize: 16,
-              color: ColorsCode.whiteColor,
-              fontWeight: FontWeight.bold,
-            ),
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            textAlign: TextAlign.center,
+          child: Column(
+            children: [
+              Text(
+                "${crews.name}",
+                style: TextStyle(
+                  height: 1.3,
+                  fontSize: 16,
+                  color: ColorsCode.whiteColor,
+                  fontWeight: FontWeight.bold,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                " ${crews.agency}",
+                style: const TextStyle(
+                  height: 1.3,
+                  fontSize: 14,
+                  color: Colors.blue,
+                  fontWeight: FontWeight.bold,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
         ),
         child: Container(
