@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:space_x/cuibt/crew_space_x_cubit.dart';
-import 'package:space_x/features/widgets/crew_item.dart';
+import 'package:space_x/features/crew/widgets/crew_item.dart';
 
-import '../../core/utils/colors_code.dart';
-import '../../data/models/CrewModel.dart';
+import '../../../core/utils/colors_code.dart';
+import '../../../data/models/CrewModel.dart';
+import '../cubit/crew_space_cubit.dart';
 
 class CrewScreen extends StatefulWidget {
   const CrewScreen({super.key});
@@ -23,7 +22,7 @@ class _CrewScreenState extends State<CrewScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<CrewSpaceXCubit>(context).getAllCrews();
+    BlocProvider.of<CrewSpaceCubit>(context).getAllCrews();
   }
 
   @override
@@ -55,7 +54,7 @@ class _CrewScreenState extends State<CrewScreen> {
   }
 
   Widget buildBlocWidget() {
-    return BlocBuilder<CrewSpaceXCubit, CrewSpaceXState>(
+    return BlocBuilder<CrewSpaceCubit, CrewSpaceState>(
       builder: (context, state) {
         if (state is CrewLoaded) {
           allCrews = (state).crews;
@@ -145,7 +144,7 @@ class _CrewScreenState extends State<CrewScreen> {
         fontFamily: 'Bebas Neue',
         color: ColorsCode.whiteColor,
         fontWeight: FontWeight.normal,
-        fontSize: 38.0,
+        fontSize: 28.0,
         shadows: const [
           Shadow(
             color: Colors.blue,
