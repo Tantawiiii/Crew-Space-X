@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:space_x/features/crew/widgets/crew_item.dart';
+import 'package:space_x/features/crew/views/widgets/crew_item.dart';
 
-import '../../../core/utils/colors_code.dart';
-import '../../../data/models/CrewModel.dart';
-import '../cubit/crew_space_cubit.dart';
+import '../../../../core/utils/colors_code.dart';
+import '../../data/models/CrewModel.dart';
+import '../../cubit/crew_space_cubit.dart';
 
 class CrewScreen extends StatefulWidget {
   const CrewScreen({super.key});
