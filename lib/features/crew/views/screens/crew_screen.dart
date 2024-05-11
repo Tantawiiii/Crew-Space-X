@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:space_x/features/crew/views/widgets/crew_item.dart';
+import 'package:space_x/features/crew/views/widgets/no_internet.dart';
+import 'package:space_x/features/crew/views/widgets/show_loading_indicator.dart';
 
 import '../../../../core/utils/colors_code.dart';
 import '../../data/models/CrewModel.dart';
@@ -39,16 +42,21 @@ class _CrewScreenState extends State<CrewScreen> {
           color: Colors.amber,
         ) : Container(),
       ),
-      body: Container(
-        //width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/back_spaceX.jpeg"),
-            fit: BoxFit.fitHeight,
-          ),
-        ),
-        child: buildBlocWidget(),
+      body:  OfflineBuilder(
+        connectivityBuilder: (
+            BuildContext context,
+            ConnectivityResult connectivity,
+            Widget child,
+            ){
+          final bool connected = connectivity != ConnectivityResult.none;
+          if (connected) {
+            return buildBlocWidget();
+          }  else {
+            return const NoInternet();
+          }
+        },
+
+        child: const ShowLoadingIndicator(),
       ),
     );
   }
