@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../data/models/CrewModel.dart';
-import '../../../data/repository/crew_repository.dart';
+import '../data/models/CrewModel.dart';
+import '../data/repository/crew_repository.dart';
 
 part 'crew_space_state.dart';
 
