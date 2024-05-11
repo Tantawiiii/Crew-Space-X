@@ -1,16 +1,36 @@
-# space_x
 
-A new Flutter project.
+# Crew Space-X 
 
-## Getting Started
+This Application shows a SpaceX Agency crew team using Bloc State Management.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## API Reference
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+#### Get all items
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```http
+  GET v4/crew
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `api_key` | `string` |https://api.spacexdata.com/ |
+
+
+
+
+
+
+## Tools:- 
+
+- GradListView with builder.
+- Bloc State Management.
+- Clean Architecture in Flutter | MVVM | BloC | Dio.
+- Hero Animation lip.
+- Cross platform Using Flutter (Android & Ios).
+- Network Check Connection.
+- Lottie Animation.
+
+
+
+

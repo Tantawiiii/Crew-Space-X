@@ -1,8 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:space_x/core/utils/colors_code.dart';
 import 'package:space_x/features/crew/data/models/CrewModel.dart';
+
+import '../widgets/no_internet.dart';
+import '../widgets/show_loading_indicator.dart';
 
 class DetailsCrewScreen extends StatelessWidget {
   final CrewModel crew;
@@ -13,42 +15,61 @@ class DetailsCrewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: CustomScrollView(
-        slivers: [
-          _buildSliverAppBar(),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(14, 14, 14, 0),
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildCrewInfo("Name: ", " ${crew.name}"),
-                      _buildDivider(320.0),
-                      _buildCrewInfo("Agency: ", " ${crew.agency}"),
-                      _buildDivider(302.0),
-                      _buildCrewInfo("wikipedia: ", " ${crew.wikipedia}"),
-                      _buildDivider(290.0),
-                      _buildCrewInfo("Status: ", " ${crew.status}"),
-                      _buildDivider(315.0),
-                      const SizedBox(
-                        height: 500,
-                      ),
-                      _buildDivider(0.0),
-                      const SizedBox(
-                        height: 20,
+      body: OfflineBuilder(
+        connectivityBuilder: (
+            BuildContext context,
+            ConnectivityResult connectivity,
+            Widget child,
+            ){
+          final bool connected = connectivity != ConnectivityResult.none;
+          if (connected) {
+            return CustomScrollView(
+              slivers: [
+                _buildSliverAppBar(),
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(14, 14, 14, 0),
+                        padding: const EdgeInsets.all(8),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _buildCrewInfo("Name: ", " ${crew.name}"),
+                            _buildDivider(320.0),
+                            _buildCrewInfo("Agency: ", " ${crew.agency}"),
+                            _buildDivider(302.0),
+                            _buildCrewInfo("wikipedia: ", " ${crew.wikipedia}"),
+                            _buildDivider(290.0),
+                            _buildCrewInfo("Status: ", " ${crew.status}"),
+                            _buildDivider(315.0),
+                            const SizedBox(
+                              height: 500,
+                            ),
+                            _buildDivider(0.0),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
               ],
-            ),
-          ),
-        ],
+            );
+          }  else {
+            return const NoInternet();
+          }
+        },
+
+        child: const ShowLoadingIndicator(),
       ),
+
+
+
+
     );
   }
 
