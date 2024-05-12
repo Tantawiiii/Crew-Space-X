@@ -30,9 +30,10 @@ This Application shows a SpaceX Agency crew team using Bloc State Management.
 - Network Check Connection.
 - Lottie Animation.
 
-## Screens:
+## => Screens:
 
   <img src="screenshot_2.png" width="200" height="500">   &nbsp;&nbsp;&nbsp;&nbsp;     <img src="search.png" width="200" height="500">  &nbsp;&nbsp;&nbsp;&nbsp;    <img src="details.png" width="200" height="500">   
  
+## => Mockup:
 
-
+<img src="Capture.PNG" width="500" height="400">
