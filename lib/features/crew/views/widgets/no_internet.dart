@@ -7,20 +7,22 @@ class NoInternet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        color: Colors.white,
+        color: Colors.black,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         child:  Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 20,),
+            Image.asset("assets/images/no_internet.png",width: 350,height: 350,),
             const Text(
               "Can't connect .. check internet...",
               style: TextStyle(
                 fontSize: 22,
-                color: Colors.grey,
+                color: Colors.amberAccent,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Image.asset("assets/images/no_internet.png"),
+
           ],
         ) ,
       ),
