@@ -12,9 +12,10 @@ This Application shows a SpaceX Agency crew team using Bloc State Management.
   GET v4/crew
 ```
 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `api_key` | `string` |https://api.spacexdata.com/ |
+| Parameter | Type     | Description                 |
+|:----------|:---------|:----------------------------|
+| `api_key` | `string` | https://api.spacexdata.com/ |
+
 
 
 
